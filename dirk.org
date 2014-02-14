@@ -15,7 +15,7 @@
 #+END_SRC
 
 ** Color Theme
-#+BEGIN_SRC emacs-lisp
+#-+BEGIN_SRC emacs-lisp
 ; Color Theme
 (auto-install-packages '(color-theme color-theme-solarized))
 (require 'color-theme)
