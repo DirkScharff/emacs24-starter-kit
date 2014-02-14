@@ -127,3 +127,13 @@
 (add-hook 'c++-mode-hook 'maybe-cmake-project-hook)
 #+END_SRC
 
+** Follow Compilation Buffer
+#+BEGIN_SRC emacs-lisp
+(setq compilation-scroll-output 'first-error)
+;(setq compilation-scroll-output t)
+#+END_SRC
+* Global Keyboard
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "H-c") 'compile)
+(global-set-key (kbd "<f5>") 'compile)
+#+END_SRC
