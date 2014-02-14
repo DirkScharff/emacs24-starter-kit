@@ -51,14 +51,62 @@
 #+end_src
 
 * Org-Mode
+#+BEGIN_SRC emacs-lisp
+  ; Org-Mode Configuration
+  (auto-install-packages '(org))
+  (require 'org)
+  (require 'org-src)
+  (require 'org-habit)
+  (require 'org-mac-message)
+  (setq org-startup-with-inline-images t)
+  (setq org-startup-indented t)
+#+END_SRC
 ** Keyboard Shortcuts
 #+BEGIN_SRC emacs-lisp
-; Org-Mode Keyboard Shortcuts
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
+  ; Org-Mode Keyboard Shortcuts
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cb" 'org-iswitchb)
 #+END_SRC
 
+** Agenda
+#+BEGIN_SRC emacs-lisp
+  ; Org-Agenda
+    (defvar org-base-dir 
+      (if (string-match "windows" (symbol-name system-type))
+          "C:\\Users\\Dirk Scharff\\Dump Truck\\ORG2\\"
+        "/Users/dirk/Dump Truck/ORG2/"))  
+    (setq org-agenda-files (list org-base-dir))
+    (setq org-agenda-mouse-1-follows-link 1)
+    (setq org-agenda-start-with-clockreport-mode 1)
+    (setq org-agenda-start-with-follow-mode 1)
+    (setq org-agenda-start-with-log-mode 1)
+  ;; Compact the block agenda view
+  (setq org-agenda-compact-blocks t)
+  ;; Do not dim blocked tasks
+  (setq org-agenda-dim-blocked-tasks nil)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+** Clocktable default:
+#+BEGIN_SRC emacs-lisp
+  (setq org-clocktable-defaults (quote 
+                                 (:maxlevel 3 :lang "en" :scope agenda-with-archives :block nil :tstart nil :tend nil :step nil :stepskip0 nil :fileskip0 t :tags nil :emphasize nil :link nil :narrow 40! :indent t :formula nil :timestamp nil :level nil :tcolumns nil :formatter nil)))
+#+END_SRC
+
+#+RESULTS:
+| :maxlevel | 3 | :lang | en | :scope | agenda-with-archives | :block | nil | :tstart | nil | :tend | nil | :step | nil | :stepskip0 | nil | :fileskip0 | t | :tags | nil | :emphasize | nil | :link | nil | :narrow | 40! | :indent | t | :formula | nil | :timestamp | nil | :level | nil | :tcolumns | nil | :formatter | nil |
+
+* Patch path on mac
+#+begin_src emacs-lisp
+(auto-install-packages '(exec-path-from-shell))
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "PYTHONPATH")
+)
+ #+end_src  
 * Programming
 ** General
 *** Look & Feel
