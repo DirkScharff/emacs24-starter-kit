@@ -116,4 +116,14 @@
 (auto-install-packages '(diff-hl))
 (global-diff-hl-mode 1)
 #+END_SRC
+** Cmake
+#+BEGIN_SRC emacs-lisp
+(auto-install-packages '(cmake-mode cmake-project))
+(require 'cmake-mode)
+(require 'cmake-project)
+(defun maybe-cmake-project-hook ()
+  (if (file-exists-p "CMakeLists.txt") (cmake-project-mode)))
+(add-hook 'c-mode-hook 'maybe-cmake-project-hook)
+(add-hook 'c++-mode-hook 'maybe-cmake-project-hook)
+#+END_SRC
 
